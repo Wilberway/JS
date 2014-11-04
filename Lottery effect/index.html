@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <title>Lottery Demo</title>
+    <style type="text/css">
+        #lotteryContainer {
+            position:relative;
+            width: 960px;
+        }
+        #drawPercent {
+            color:#F60;
+        }
+    </style>
+</head>
+<body>
+    <!--<button id="freshBtn">再来一次</button><label>已刮开 <span id="drawPercent">0%</span> 区域。</label>-->
+    <div id="lotteryContainer"></div>
+    <script src="Lottery.js"></script>
+    <script>
+        window.onload = function () {
+            var lottery = new Lottery('lotteryContainer', 'bg3.jpg', 'image', 1024, 768, drawPercent);
+            lottery.init('bg.jpg', 'image');
+
+            document.getElementById('freshBtn').onclick = function() {
+                drawPercentNode.innerHTML = '0%';
+                lottery.init('bg.jpg', 'image');
+            }
+
+            var drawPercentNode = document.getElementById('drawPercent');
+
+            function drawPercent(percent) {
+                drawPercentNode.innerHTML = percent + '%';
+            }
+        }
+
+        function getRandomStr(len) {
+            var text = "";
+            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            for( var i=0; i < len; i++ )
+                text += possible.charAt(Math.floor(Math.random() * possible.length));
+            return text;
+        }
+    </script>
+</body>
+</html>
